@@ -7,14 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css.css">
     <script>
+        // let third = document.getElementById('third');
+        // let forth = document.getElementById('forth');
+        // let fifth = document.getElementById('fifth');
+        // third.style.display = 'none';
+        // forth.style.display = 'none';
+        // fifth.style.display = 'none';
         let tcount = prompt("total no. of member's");
+        let tgrup = prompt("total no. of member's in one group (max=5)");
+        if (tgrup > 5) {
+            alert("Member should be less then 6");
+            let tgrup = prompt("total no. of member's in one group (max=5)");
+        }
+
         let names = [];
-        let no = [];
-        let x = 0;
+        let x = 1;
+        let counter = 0;
 
+        // if (tgrup == 3) {
+        //     third.classList.remove("hide")
+        // }
+        // else if (tgrup == 4) {
+        //     third.classList.remove('hide')
+        //     forth.classList.remove('hide')
 
-        namebox = document.getElementById('name-box');
-        n = document.querySelector('#first');
+        // }
+        // else if (tgrup == 5) {
+        //     third.classList.remove('hide')
+        //     forth.classList.remove('hide')
+        //     fifth.classList.remove('hide')
+        // }
+        
 
         for (let i = 0; i < tcount; i++) {
             let j = i + 1;
@@ -23,43 +46,93 @@
         }
         let total = tcount;
 
-     
-     
+
+
         function print(a) {
             console.log(names[a]);
-            if(x==0){
-                let p = names[a]; 
-            document.getElementById('first').innerHTML = p
-            x=1;
+            if (x == 1) {
+                let p = names[a];
+                document.getElementById('third')
+                document.getElementById('first').innerHTML = ' <h1 id="first">'+p+'</h1>'
+                x = 2;
             }
-            else{
-                let q = names[a]; 
-            document.getElementById('sec').innerHTML = q
-            x=0;
+            else {
+                if (x == 5) {
+                    let p = names[a];
+                    document.getElementById('fifth').innerHTML = ' <h1 id="fifth">'+p+'</h1>'
+                    x = 1;
+                }
+                else {
+                    if (x == 4) {
+                        let p = names[a];
+                        document.getElementById('forth').innerHTML = ' <h1 id="forth">'+p+'</h1>'
+                        if (tgrup > 4) {
+                            x = 5;
+                        } else {
+                            x = 1;
+                        }
+                    }
+                    else {
+                        if (x == 3) {
+                            let p = names[a];
+                            document.getElementById('third').innerHTML = ' <h1 id="third">'+p+'</h1>'
+                            if (tgrup > 3) {
+                                x = 4;
+                            } else {
+                                x = 1;
+                            }
+                        }
+                        else {
+                            let p = names[a];
+                            document.getElementById('sec').innerHTML = ' <h1 id="sec">'+p+'</h1>'
+                            if (tgrup > 2) {
+                                x = 3;
+                            } else {
+                                x = 1;
+                            }
+                        }
+
+                    }
+
+                }
+
             }
+
+
+
+
             names.splice(a, 1);
         }
         function change() {
-           
+            counter += 1;
+
+            if (counter <= tcount) {
                 let a = Math.floor(Math.random() * total);
                 print(a);
                 total = total - 1;
+            }
+            else {
+                alert("Group is completly created")
+            }
         }
 
 
 
 
     </script>
-    <title>Group Selector</title>
+    <title>Team Builder</title>
 </head>
 
 <body>
     <nav>
-        <h1>Group Of 2</h1>
+        <h1>Team Builder</h1>
     </nav>
     <div id="name-box">
-        <h1 id="first">---</h1>
-        <h1 id="sec">---</h1>
+        <h1 id="first"></h1>
+        <h1 id="sec"></h1>
+        <h1 id="third" class="hide"></h1>
+        <h1 id="forth" class="hide"></h1>
+        <h1 id="fifth" class="hide"></h1>
     </div>
     <button class="but" onclick="change()">Create</button>
 </body>
